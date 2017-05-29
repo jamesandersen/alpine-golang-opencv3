@@ -5,7 +5,18 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/reposit
 
 RUN apk update && \
 	apk upgrade && \
-	apk add opencv
+	apk add gcc musl-dev opencv
+RUN apk add g++
+
+RUN ln /usr/lib/libopencv_core.so.3.2.0 /usr/lib/libopencv_core.so
+RUN ln /usr/lib/libopencv_highgui.so.3.2.0 /usr/lib/libopencv_highgui.so
+RUN ln /usr/lib/libopencv_imgcodecs.so.3.2.0 /usr/lib/libopencv_imgcodecs.so
+RUN ln /usr/lib/libopencv_imgproc.so.3.2.0 /usr/lib/libopencv_imgproc.so
+RUN ln /usr/lib/libopencv_ml.so.3.2.0 /usr/lib/libopencv_ml.so
+RUN ln /usr/lib/libopencv_objdetect.so.3.2.0 /usr/lib/libopencv_objdetect.so
+RUN ln /usr/lib/libopencv_photo.so.3.2.0 /usr/lib/libopencv_photo.so
+
+COPY include/ /usr/include/
 
 #=====================================
 RUN apk add --no-cache ca-certificates
